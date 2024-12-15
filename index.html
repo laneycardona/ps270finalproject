@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -32,7 +32,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -93,7 +93,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta property="description" itemprop="description" content="My final project"/>
 
 
-  <meta name="article:author" content="Your Name Here"/>
+  <meta name="article:author" content="Laney Cardona"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="PS270 Final Project"/>
@@ -110,12 +110,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["PS270 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Your Name Here"]}]}]},{"type":"character","attributes":{},"value":["My final project"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["PS270 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Laney Cardona"]}]}]},{"type":"character","attributes":{},"value":["My final project"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-12-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -227,9 +227,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     display: none !important;
   }
 
+  hr.section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0px;
+  }
+
+
+  d-byline {
+    border-top: none;
+  }
+
   d-article {
     padding-top: 2.5rem;
     padding-bottom: 30px;
+    border-top: none;
   }
 
   d-appendix {
@@ -324,6 +336,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article div.sourceCode pre {
     padding-left: 18px;
     font-size: 14px;
+  }
+
+  /* tweak for Pandoc numbered line within distill */
+  d-article pre.numberSource code > span {
+      left: -2em;
   }
 
   d-article pre {
@@ -1085,6 +1102,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // create d-title
     $('.d-title').changeElementType('d-title');
 
+    // separator
+    var separator = '<hr class="section-separator" style="clear: both"/>';
+    // prepend separator above appendix
+    $('.d-byline').before(separator);
+    $('.d-article').before(separator);
+
     // create d-byline
     var byline = $('<d-byline></d-byline>');
     $('.d-byline').replaceWith(byline);
@@ -1162,8 +1185,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     $('.distill-force-highlighting-css').parent().remove();
 
     // remove empty line numbers inserted by pandoc when using a
-    // custom syntax highlighting theme
-    $('code.sourceCode a:empty').remove();
+    // custom syntax highlighting theme, except when numbering line
+    // in code chunk
+    $('pre:not(.numberLines) code.sourceCode a:empty').remove();
 
     // load distill framework
     load_distill_framework();
@@ -1189,12 +1213,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
       // add orcid ids
       $('.authors-affiliations').find('.author').each(function(i, el) {
         var orcid_id = front_matter.authors[i].orcidID;
+        var author_name = front_matter.authors[i].author
         if (orcid_id) {
           var a = $('<a></a>');
           a.attr('href', 'https://orcid.org/' + orcid_id);
           var img = $('<img></img>');
           img.addClass('orcid-id');
-          img.attr('alt', 'ORCID ID');
+          img.attr('alt', author_name ? 'ORCID ID for ' + author_name : 'ORCID ID');
           img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
           a.append(img);
           $(this).append(a);
@@ -1472,7 +1497,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="index_files/header-attrs-2.17/header-attrs.js"></script>
+  <script src="index_files/header-attrs-2.29/header-attrs.js"></script>
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1493,7 +1518,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"PS270 Final Project","description":"My final project","authors":[{"author":"Your Name Here","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+{"title":"PS270 Final Project","description":"My final project","authors":[{"author":"Laney Cardona","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1504,6 +1529,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-title">
 <h1>PS270 Final Project</h1>
+
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p>My final project</p>
@@ -1511,15 +1537,425 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-byline">
   
-  Your Name Here
+  Laney Cardona
   
 
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to…</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>ps270data</span><span class='op'>)</span></span>
+<span><span class='va'>trains</span></span></code></pre>
+</div>
+<pre><code># A tibble: 115 × 14
+     age  male income white college usborn treatment ideology
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1    31     0 135000     1       1      1         1        3
+ 2    34     0 105000     1       1      0         1        4
+ 3    63     1 135000     1       1      1         1        2
+ 4    45     1 300000     1       1      1         1        4
+ 5    55     1 135000     1       1      1         0        2
+ 6    37     0  87500     1       1      1         1        5
+ 7    53     0  87500     1       0      1         0        5
+ 8    36     1 135000     1       1      1         1        4
+ 9    54     0 105000     1       0      1         0        3
+10    42     1 135000     1       1      1         1        4
+# ℹ 105 more rows
+# ℹ 6 more variables: numberim.pre &lt;dbl&gt;, numberim.post &lt;dbl&gt;,
+#   remain.pre &lt;dbl&gt;, remain.post &lt;dbl&gt;, english.pre &lt;dbl&gt;,
+#   english.post &lt;dbl&gt;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>trains</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>ideology_group <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>ideology</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"1. Most Liberal"</span>,</span>
+<span>    <span class='va'>ideology</span> <span class='op'>==</span> <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"2. Liberal"</span>, </span>
+<span>    <span class='va'>ideology</span> <span class='op'>==</span> <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"3. Moderate"</span>,</span>
+<span>    <span class='va'>ideology</span> <span class='op'>==</span> <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"4. Conservative"</span>,</span>
+<span>    <span class='va'>ideology</span> <span class='op'>==</span> <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"5. Most Conservative"</span></span>
+<span>  <span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>trains</span></span></code></pre>
+</div>
+<pre><code># A tibble: 115 × 15
+     age  male income white college usborn treatment ideology
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1    31     0 135000     1       1      1         1        3
+ 2    34     0 105000     1       1      0         1        4
+ 3    63     1 135000     1       1      1         1        2
+ 4    45     1 300000     1       1      1         1        4
+ 5    55     1 135000     1       1      1         0        2
+ 6    37     0  87500     1       1      1         1        5
+ 7    53     0  87500     1       0      1         0        5
+ 8    36     1 135000     1       1      1         1        4
+ 9    54     0 105000     1       0      1         0        3
+10    42     1 135000     1       1      1         1        4
+# ℹ 105 more rows
+# ℹ 7 more variables: numberim.pre &lt;dbl&gt;, numberim.post &lt;dbl&gt;,
+#   remain.pre &lt;dbl&gt;, remain.post &lt;dbl&gt;, english.pre &lt;dbl&gt;,
+#   english.post &lt;dbl&gt;, ideology_group &lt;chr&gt;</code></pre>
+</div>
+creating average_change variable
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>average_change</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>treatment <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Treated"</span>, <span class='st'>"Control"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='st'>"Treated"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>ideology_group</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>numberim.post <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>numberim.post</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
+<span>            numberim.pre <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>numberim.pre</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>average_change <span class='op'>=</span> <span class='va'>numberim.post</span> <span class='op'>-</span> <span class='va'>numberim.pre</span><span class='op'>)</span></span>
+<span><span class='va'>average_change</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 4
+  ideology_group       numberim.post numberim.pre average_change
+  &lt;chr&gt;                        &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+1 1. Most Liberal               3.2          3            0.200 
+2 2. Liberal                    2.79         2.26         0.526 
+3 3. Moderate                   3.08         3.33        -0.25  
+4 4. Conservative               3.64         3.55         0.0909
+5 5. Most Conservative          3.25         4           -0.75  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>trains</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>average_change <span class='op'>=</span> <span class='va'>numberim.post</span> <span class='op'>-</span> <span class='va'>numberim.pre</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+creating pre treatment variable
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pre_treatment</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>treatment <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Treated"</span>, <span class='st'>"Control"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='st'>"Treated"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>ideology_group</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>numberim.pre <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>numberim.pre</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>pre_treatment <span class='op'>=</span> <span class='va'>numberim.pre</span><span class='op'>)</span></span>
+<span><span class='va'>pre_treatment</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 3
+  ideology_group       numberim.pre pre_treatment
+  &lt;chr&gt;                       &lt;dbl&gt;         &lt;dbl&gt;
+1 1. Most Liberal              3             3   
+2 2. Liberal                   2.26          2.26
+3 3. Moderate                  3.33          3.33
+4 4. Conservative              3.55          3.55
+5 5. Most Conservative         4             4   </code></pre>
+</div>
+creating post treatment variable
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>post_treatment</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>treatment <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Treated"</span>, <span class='st'>"Control"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>treatment</span> <span class='op'>==</span> <span class='st'>"Treated"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>ideology_group</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>numberim.post <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>numberim.post</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>post_treatment <span class='op'>=</span> <span class='va'>numberim.post</span><span class='op'>)</span></span>
+<span><span class='va'>post_treatment</span></span></code></pre>
+</div>
+<pre><code># A tibble: 5 × 3
+  ideology_group       numberim.post post_treatment
+  &lt;chr&gt;                        &lt;dbl&gt;          &lt;dbl&gt;
+1 1. Most Liberal               3.2            3.2 
+2 2. Liberal                    2.79           2.79
+3 3. Moderate                   3.08           3.08
+4 4. Conservative               3.64           3.64
+5 5. Most Conservative          3.25           3.25</code></pre>
+</div>
+<h2 id="results-from-milestone">Results from milestone</h2>
+<p>The table shows the average attitudes regarding immigration in the country before and after interacting with an immigrant from a scale of 1-5, where 1 represents the most pro-immigration attitudes and 5 represents the least pro-immigration attitudes. Additionally, it highlights the average change in attitudes for each ideology group due to this interaction. The table indicates that the most conservative participants were least supportive of increasing the number of immigrants in the country, while the most liberal participants were most supportive. This is to be expected, as the conservative ideology tends to be more supportive of stronger border control to limit the accessibility for immigrants to come into the country. The graph that represents the shift in attitudes regarding immigration policies after the participants interacted with the immigrant indicates that the participants in the “Most Conservative” ideology group had the greatest shift in attitudes compared to the other ideology groups. Additionally, the graph shows this ideology group had a significant negative shift, meaning that after they interacted with the immigrant, their attitudes shifted towards more pro-immigration policies, supporting my hypothesis. Finally, the last column in the table represents the attitudes of the participants after interacting with the immigrant. As I hypothesized, the attitudes regarding immigration policies after the treatment shows that the more liberal ideological groups tended to have a smaller shift in attitude. This is also consistent within liberal ideologies, as these political groups already tend to favor pro-immigration policies. Therefore, according to this data, political ideologies are associated with attitudes toward immigration policies. Furthermore, the “Most Conservative” ideology group had a much more significant shift in attitudes regarding these policies compared to the “Most Liberal” ideology group.</p>
+<h2 id="introduction">Introduction</h2>
+<p>My research observed how political ideologies are associated with attitudes toward immigration policies, specifically looking how the level of attitude shifts regarding these policies differed depending on the political demographic of the participant. My hypothesis is that the participants with conservative ideologies will be initially less likely to support increasing the number of immigrants allowed in the country, but after interacting with foreigners they will have a greater shift in attitudes towards pro-immigration policies compared to those with liberal views. People with conservative beliefs and values tend to oppose increasing the amount of immigrants in the country, as they often perceive immigrants as a competition for jobs and resources. However, I think encountering foreigners in a casual setting may humanize them for these conservatives, shifting their beliefs to see them as individuals rather than as competition. I expect that liberals will have a smaller shift after this interaction, as they already tend to have positive attitudes towards immigration in the country.</p>
+<p>This research is significant, particularly in our country where immigration is a very politically charged topic, as it may seek to explain how individuals’ beliefs and values evolve, while also bridging the current nation-wide political divide. By exploring how there may be some common ground between conservatives and liberals, this research may be able to help dismantle political polarization and enable greater opportunities for healthy discourse that can offer potential solutions to current policy debates, in this case regarding immigration.</p>
+<h2 id="data">Data</h2>
+<p>The data for this research comes from a randomized field experiment conducted by Harvard Professor, Ryan Enos. He focused on individuals from overwhelmingly white communities who rode the communal train and explored how exposure to demographic change affected their political views. His study was published in the article “Causal Effect of Intergroup Contact on Exclusionary Attitudes.” In the experiment, the trains were randomly assigned to either the “Treated group” or the “Control group,” where the treatment involved the presence of two native Spanish-speaking confederates meant to simulate the predicted demographic change in the United States. Those who were in the control group never encountered the confederates. My research uses a before-and-after design, as I am comparing the attitudes before and after the participants receive treatment to determine the degree of changes in views the participants experience.</p>
+<p>The independent variable is the political ideologies of the participants, measured by the survey data for each participant from the experiment. Political ideologies are likely to impact individuals’ pre-existing beliefs, which would set a baseline for their attitudes towards immigration before treatment, and may impact their responses to treatment. Through this method, we can determine how the treatment effects differ depending on the participants’ political ideology.</p>
+<p>The dependent variable, the participants’ shift in attitudes regarding immigration policies, is measured using a survey question on a 5 point Likert scale, before and after the treatment. Participants were asked whether or not the number of immigrants in the country should increase or decrease, where a score of 1 indicates the participant believes the number of immigrants should increase and a score of 5 indicates the participant believes the number of immigrants should decrease. The attitude shift of each ideology group is represented by the difference between their responses before and after treatment.</p>
+creating the pre treatment plot
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pre_treatment</span> <span class='op'>&lt;-</span> <span class='va'>pre_treatment</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>pre_treatment_group <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1. Most Liberal"</span>, <span class='st'>"2. Liberal"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Liberals"</span>,</span>
+<span>    <span class='va'>ideology_group</span> <span class='op'>==</span> <span class='st'>"3. Moderate"</span> <span class='op'>~</span> <span class='st'>"Moderates"</span>,</span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"4. Conservative"</span>, <span class='st'>"5. Most Conservative"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Conservatives"</span></span>
+<span>  <span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>pre_treatment_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>pre_treatment</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology_group</span>,</span>
+<span>                                               y <span class='op'>=</span> <span class='va'>pre_treatment</span>,</span>
+<span>                                               fill <span class='op'>=</span> <span class='va'>pre_treatment_group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Liberals"</span> <span class='op'>=</span> <span class='st'>"blue"</span>,</span>
+<span>                               <span class='st'>"Moderates"</span> <span class='op'>=</span> <span class='st'>"grey"</span>,</span>
+<span>                               <span class='st'>"Conservatives"</span> <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>,</span>
+<span>                    name <span class='op'>=</span> <span class='st'>"Political Ideology"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Attitudes Toward Immigration Policies by Ideology Before Treatment"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Ideology Group"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Attitudes Towards Immigration in the Country</span></span>
+<span><span class='st'>       (1 = Increase, 5 = Decrease)"</span>,</span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"Participants were asked if the number of immigrants in the country should increase or decrease"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>7</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>13</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.subtitle <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span>    legend.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>pre_treatment_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<p>This table shows the relationship between the political ideologies of the participants and how they felt about whether immigrants in the country should increase or decrease before treatment. Based on the scale where a 1 represents the most positive attitude and 5 represents the most negative, this table shows that before treatment, conservative participants had more negative views towards immigration in the country, while liberal participants had more positive views. More specifically, the more radical conservatives were viewed immigration the most negatively, and the moderate liberals viewed immigration the most positively. This is to be expected, as these beliefs align with the traditional values of conservative and liberal political ideologies. My research explores how the differing political ideologies will result in different levels of shifts in attitudes after receiving treatment.</p>
+<h2 id="results">Results</h2>
+creating the shift in attitudes plot
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>average_change</span> <span class='op'>&lt;-</span> <span class='va'>average_change</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>average_change_group <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1. Most Liberal"</span>, <span class='st'>"2. Liberal"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Liberals"</span>,</span>
+<span>    <span class='va'>ideology_group</span> <span class='op'>==</span> <span class='st'>"3. Moderate"</span> <span class='op'>~</span> <span class='st'>"Moderates"</span>,</span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"4. Conservative"</span>, <span class='st'>"5. Most Conservative"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Conservatives"</span></span>
+<span>  <span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>ideology_shift_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>average_change</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology_group</span>, </span>
+<span>                                            y <span class='op'>=</span> <span class='va'>average_change</span>,</span>
+<span>                                            fill <span class='op'>=</span> <span class='va'>average_change_group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Liberals"</span> <span class='op'>=</span> <span class='st'>"blue"</span>,</span>
+<span>                               <span class='st'>"Moderates"</span> <span class='op'>=</span> <span class='st'>"grey"</span>,</span>
+<span>                               <span class='st'>"Conservatives"</span> <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>,</span>
+<span>                    name <span class='op'>=</span> <span class='st'>"Political Ideology"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Shift in Attitudes Toward Immigration Policies by Ideology After Treatment"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Ideology Group"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Average Change in Immigration Policy Attitudes"</span>,</span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"The participants were asked the same question after interacting with the foreigners"</span>,</span>
+<span>       caption <span class='op'>=</span> <span class='st'>"A positive shift indicates a change towards negative attitudes.</span></span>
+<span><span class='st'>       A negative shift indicates a change towards positive attitudes."</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>7</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.subtitle <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.caption <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span>    legend.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>ideology_shift_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>This bar graph shows the average change in attitudes towards immigration policies after treatment, representing the difference in the attitudes from before and after participants interacted with the foreigners. The average change in attitudes shows either a positive or negative shift from their pre-existing beliefs before treatment. The scale used in this analysis indicates that a value of 1 reflects a positive attitude towards immigration, while a value of 5 reflects a negative attitude towards immigration. Since lower values reveal a more positive attitude towards immigration, a decrease in value after treatment suggests a positive shift in attitudes towards immigration. On the other hand, an increase in value after treatment would suggest a negative shift in attitudes towards immigration. From this data, the participants in the “Most Conservative” group experienced a strong positive shift in attitudes after treatment, forming a more supportive stance to immigration than before. Interestingly, the participants in the “Liberal” group experienced a negative shift away from positive immigration attitudes.</p>
+Creating a comparison graph of attitudes before and after treatment: didnt account for only treated
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>comparison_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span>  ideology_group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>" All Liberals"</span>,<span class='st'>"All Conservatives"</span><span class='op'>)</span>,</span>
+<span>  pre_treatment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.59</span>, <span class='fl'>3.55</span><span class='op'>)</span>,</span>
+<span>  post_treatment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.66</span>, <span class='fl'>3.24</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>comparison_long</span> <span class='op'>&lt;-</span> <span class='va'>comparison_plot</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>pre_treatment</span>, <span class='va'>post_treatment</span><span class='op'>)</span>,</span>
+<span>               names_to <span class='op'>=</span> <span class='st'>"time"</span>,</span>
+<span>               values_to <span class='op'>=</span> <span class='st'>"attitude_score"</span><span class='op'>)</span></span>
+<span><span class='va'>comparison_long</span><span class='op'>$</span><span class='va'>time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>comparison_long</span><span class='op'>$</span><span class='va'>time</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pre_treatment"</span>, <span class='st'>"post_treatment"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>comparison_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>comparison_long</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology_group</span>,</span>
+<span>                                               y <span class='op'>=</span> <span class='va'>attitude_score</span>,</span>
+<span>                                               fill <span class='op'>=</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pre_treatment"</span> <span class='op'>=</span> <span class='st'>"darkgreen"</span>, <span class='st'>"post_treatment"</span> <span class='op'>=</span> <span class='st'>"salmon2"</span><span class='op'>)</span>,</span>
+<span>                    labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Before Treatment"</span>, <span class='st'>"After Treatment"</span><span class='op'>)</span>,</span>
+<span>                    name <span class='op'>=</span> <span class='st'>"Treatment Phase"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Shift in Attitudes Towards Immigration Policies: Before and After Treatment"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"'Most Liberal' and 'Liberal' participants are grouped in 'All Liberals'</span></span>
+<span><span class='st'>    'Conservative' and 'Most Conservative' participants are grouped in 'All Conservatives'"</span>,</span>
+<span>    subtitle <span class='op'>=</span> <span class='st'>"Comparison of Attitude Changes for All Liberals and All Conservatives"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Ideology Group"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Average Attitude Score Toward Immigration Policies"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9.5</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10.5</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.subtitle <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9.5</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.caption <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span>    legend.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>comparison_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<p>This graph illustrates a comparison between the average attitude scores towards immigration before and after treatment.</p>
+<p>In order to better visualize these shifts in attitudes, this graph</p>
+only treated
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>comparison_plot1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span>  ideology_group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>" All Liberals"</span>,<span class='st'>"All Conservatives"</span><span class='op'>)</span>,</span>
+<span>  pre_treatment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.42</span>, <span class='fl'>3.67</span><span class='op'>)</span>,</span>
+<span>  post_treatment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.88</span>, <span class='fl'>3.53</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>comparison_long</span> <span class='op'>&lt;-</span> <span class='va'>comparison_plot1</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>pre_treatment</span>, <span class='va'>post_treatment</span><span class='op'>)</span>,</span>
+<span>               names_to <span class='op'>=</span> <span class='st'>"time"</span>,</span>
+<span>               values_to <span class='op'>=</span> <span class='st'>"attitude_score"</span><span class='op'>)</span></span>
+<span><span class='va'>comparison_long</span><span class='op'>$</span><span class='va'>time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>comparison_long</span><span class='op'>$</span><span class='va'>time</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pre_treatment"</span>, <span class='st'>"post_treatment"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>comparison_plot1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>comparison_long</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ideology_group</span>,</span>
+<span>                                               y <span class='op'>=</span> <span class='va'>attitude_score</span>,</span>
+<span>                                               fill <span class='op'>=</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pre_treatment"</span> <span class='op'>=</span> <span class='st'>"darkgreen"</span>, <span class='st'>"post_treatment"</span> <span class='op'>=</span> <span class='st'>"salmon2"</span><span class='op'>)</span>,</span>
+<span>                    labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Before Treatment"</span>, <span class='st'>"After Treatment"</span><span class='op'>)</span>,</span>
+<span>                    name <span class='op'>=</span> <span class='st'>"Treatment Phase"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Shift in Attitudes Towards Immigration Policies: Before and After Treatment"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"'Most Liberal' and 'Liberal' participants are grouped in 'All Liberals'</span></span>
+<span><span class='st'>    'Conservative' and 'Most Conservative' participants are grouped in 'All Conservatives'"</span>,</span>
+<span>    subtitle <span class='op'>=</span> <span class='st'>"Comparison of Attitude Changes for All Liberals and All Conservatives"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Ideology Group"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Average Attitude Score Toward Immigration Policies"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9.5</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10.5</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.subtitle <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9.5</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.caption <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    legend.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span>    legend.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span><span class='va'>comparison_plot1</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<p>To create a clearer analysis to observe how the levels of attitude changes differed between ideological groups, I combined the “Most Liberal” and “Liberal” participants into an “All Liberals” group, and combined the “Conservative” and “Most Conservative” participants into an “All Conservatives” group. Taking the average scores for each category, I merged them to create the overall group averages for “All Liberals” and “All Conservatives”, showing the average group changes from before and after treatment. This graph shows that after treatment, on average, the liberal participants experienced a slight shift towards negative attitudes, while the conservative participants experienced a greater shift towards positive attitudes.</p>
+Creating a binary variable
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>trains</span> <span class='op'>&lt;-</span> <span class='va'>trains</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>binary_variable <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1. Most Liberal"</span>, <span class='st'>"2. Liberal"</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>0</span>,</span>
+<span>    <span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"4. Conservative"</span>, <span class='st'>"5. Most Conservative"</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>1</span></span>
+<span>  <span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>ideology_group</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"3. Moderate"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>trains</span></span></code></pre>
+</div>
+<pre><code># A tibble: 83 × 17
+     age  male income white college usborn treatment ideology
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1    34     0 105000     1       1      0         1        4
+ 2    63     1 135000     1       1      1         1        2
+ 3    45     1 300000     1       1      1         1        4
+ 4    55     1 135000     1       1      1         0        2
+ 5    37     0  87500     1       1      1         1        5
+ 6    53     0  87500     1       0      1         0        5
+ 7    36     1 135000     1       1      1         1        4
+ 8    42     1 135000     1       1      1         1        4
+ 9    50     1 250000     1       1      1         1        4
+10    24     1 105000     1       1      1         1        4
+# ℹ 73 more rows
+# ℹ 9 more variables: numberim.pre &lt;dbl&gt;, numberim.post &lt;dbl&gt;,
+#   remain.pre &lt;dbl&gt;, remain.post &lt;dbl&gt;, english.pre &lt;dbl&gt;,
+#   english.post &lt;dbl&gt;, ideology_group &lt;chr&gt;, average_change &lt;dbl&gt;,
+#   binary_variable &lt;dbl&gt;</code></pre>
+</div>
+regression
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span><span class='va'>reg1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>average_change</span> <span class='op'>~</span> <span class='va'>binary_variable</span>, data <span class='op'>=</span> <span class='va'>trains</span><span class='op'>)</span></span>
+<span><span class='va'>reg1_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>reg1</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>reg1_table</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.074</td>
+<td style="text-align: right;">0.115</td>
+<td style="text-align: right;">0.644</td>
+<td style="text-align: right;">0.522</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">binary_variable</td>
+<td style="text-align: right;">-0.384</td>
+<td style="text-align: right;">0.195</td>
+<td style="text-align: right;">-1.975</td>
+<td style="text-align: right;">0.052</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To create a clearer analysis that observed how liberals and conservatives as a whole differed in their shifts in attitude, I created a binary variable, in which the “Most Liberal” and “Liberal” groups were assigned to 0, and the “Conservative” and “Most Conservative” groups were assigned to 1. This regression output shows the relationship between these two combined ideology groups and their average change in attitudes towards immigration policies in the United States. The Intercept category represents the average change in attitudes for the reference group, here it refers to the liberal groups. The binary variable category compares the conservative groups to the liberal groups. The binary variable category compares the conservative groups to the liberal groups. The main coefficient for the intercept is 0.074, indicating that the average change in attitudes for liberals slightly increased. The main coefficient for the binary variable is -0.384, suggesting that in relation to the liberals, on average the conservatives experienced shifts that were about 0.384 less than liberals. Therefore, based on the scale of this experiment, the liberals experienced a slightly negative change in attitudes towards immigration policies, whereas the conservatives had a shift towards more positive attitudes towards immigration policies.</p>
+<p>The p-value of the binary variable is 0.052. With an <span class="math inline">\(\alpha\)</span> of 0.05, we fail to reject the null and the variable is not statistically significant because it is greater than the significance threshold. While the main coefficient (-0.384) suggests that there could be a meaningful difference in attitude changes between liberals and conservatives, as conservatives on average shifted 0.384 points closer to positive attitudes toward immigration policies than liberals, the p-value is slightly above the significance threshold. Therefore, because the variable is just barely above the threshold, it is marginally significant, indicating that there may be a difference, but it is not significant enough to confidently claim causality. Although the binary variable may be slightly associated with the dependent variable, through this regression output can not determine this relationship to be causal.</p>
+creating the regression visualization with standard error
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>reg1_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>reg1_table</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>term</span>, y <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_errorbar</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>ymin <span class='op'>=</span> <span class='va'>estimate</span> <span class='op'>-</span> <span class='va'>std.error</span>, ymax <span class='op'>=</span> <span class='va'>estimate</span> <span class='op'>+</span> <span class='va'>std.error</span><span class='op'>)</span>, width <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Regression Results"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Ideology"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Coefficient"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"A negative coefficient indicates participants are shifting towards more positive attitutdes.</span></span>
+<span><span class='st'>    A positive coefficient indicates participants are shifting towards more negative attitudes. "</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"All Liberals"</span>, <span class='st'>"All Conservatives"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>    axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>13</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    axis.title.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>13</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    plot.caption.position <span class='op'>=</span> <span class='st'>"panel"</span>, </span>
+<span>    plot.caption <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>, </span>
+<span>    plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>18</span>, face <span class='op'>=</span> <span class='st'>"bold"</span>, family <span class='op'>=</span> <span class='st'>"Georgia"</span><span class='op'>)</span>,</span>
+<span>    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"black"</span>, fill <span class='op'>=</span> <span class='cn'>NA</span>, size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span></span>
+<span>  </span>
+<span><span class='va'>reg1_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+</div>
+<p>This graph shows a visualization of the regression output above, indicating on average, liberals experienced a small shift toward negative attitudes on immigration policies, while conservatives moved towards more positive attitudes. Additionally, it shows that not only did conservatives experience a greater overall shift, but their average attitude change also indicates they shifted toward more favorable views regarding immigration in the country. However, the wide error bars for the binary variable suggest that this estimate is less precise, meaning that there is greater uncertainty regarding the reliability for this estimate.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Initially, the data aligned with my hypothesis, in which conservatives started out with the most negative views on immigration and on average, after encountering the confederates, they experienced a greater shift in attitudes towards more favorable attitudes on immigration compared to liberals. However, the p-value indicates the main coefficient was not statistically significant. While the coefficient shown in the regression supports my hypothesis, since the binary variable comparing conservatives to liberals was above the significance threshold, it is unclear if there is a meaningful difference in the attitude shifts between the two ideology groups. Additionally, because of the wide standard error of the binary variable, this relationship is not completely reliable. Therefore, my hypothesis is not fully supported, and these results should be taken with caution due to its lack of certainty and precision. The presence of external influences as confounding factors is one of the most significant limitations of this research. Because this experiment used a before-and-after research design, the results don’t consider the possible external influences, such as peer interactions, media exposure, or major events that could affect the participants’ shifts in attitudes. Therefore, through the fundamental problem of causal inference, it is impossible to determine the confederate interaction is what changed the participants’ attitudes. To improve my analysis, I would increase the sample size of the experiment. A larger sample size would reduce the margin of error, creating more precise and accurate estimates of the regression coefficients. This would improve the reliability and certainty of the analysis, making it more likely that a true effect and difference can be observed if it exists.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1527,6 +1963,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

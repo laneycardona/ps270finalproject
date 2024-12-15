@@ -17,8 +17,7 @@ This research is significant, particularly in our country where immigration is a
 
 ## Data 
 
-# Loading the data
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 library(tidyverse)
 library(ps270data)
 trains
@@ -31,8 +30,7 @@ The independent variable is the political ideologies of the participants, measur
 The dependent variable, the participants' shift in attitudes regarding immigration policies, is measured using a survey question on a 5 point Likert scale, before and after the treatment. Participants were asked whether or not the number of immigrants in the country should increase or decrease, where a score of 1 indicates the participant believes the number of immigrants should increase and a score of 5 indicates the participant believes the number of immigrants should decrease. The attitude shift of each ideology group is represented by the difference between their responses before and after treatment. 
 
 
-# Creating descriptive labels for the numerical values
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 library(tidyverse)
 trains <- trains |>
   mutate(ideology_group = case_when(
@@ -45,8 +43,7 @@ trains <- trains |>
 trains
 ``` 
 
-# Creating a variable for the "Treated" group's attitudes before treatment
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 pre_treatment <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -56,8 +53,7 @@ pre_treatment <- trains |>
 pre_treatment
 ```
 
-# Creating a variable for the "Treated" group's attitudes after treatment
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 post_treatment <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -67,8 +63,7 @@ post_treatment <- trains |>
 post_treatment
 ```
 
-# Creating a variable to indicate the participants average change in attitudes
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 average_change <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -214,8 +209,7 @@ comparison_plot
 To create a clearer analysis to observe how the levels of attitude changes differed between ideological groups after treatment, I combined the "Most Liberal" and "Liberal" participants into an "All Liberals" group, and combined the "Conservative" and "Most Conservative" participants into an "All Conservatives" group. Taking the average scores for each category, I merged them to create the overall group averages for "All Liberals" and "All Conservatives", showing the average group changes from before and after treatment. Although individually, the "Most Conservative" group experienced a large shift in attitudes, the graph shows that after treatment, on average all conservative participants experienced only a slight shift towards positive attitudes. Additionally, on average, all liberal participants experienced a greater shift towards negative attitudes. 
 
 
-# Creating a binary variable based on ideology group
-```{r echo = FALSE}
+```{r echo = FALSE, results = "hide"}
 treated <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated")|>
@@ -230,8 +224,8 @@ treated
 # Regression output of the relationship between ideology groups and average change in attitudes
 ```{r echo = FALSE}
 library(broom)
-reg2 <- lm(average_change ~ binary_variable, data = treated)
-reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95) |>
+reg <- lm(average_change ~ binary_variable, data = treated)
+reg_table <- tidy(reg, conf.int = TRUE, conf.level = 0.95) |>
   rename(
     "Variable" = term,
     "Coefficient" = estimate,
@@ -240,8 +234,14 @@ reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95) |>
     "P-value" = p.value,
     "Lower Confidence Interval" = conf.low,
     "Upper Confidence Interval" = conf.high
-  )
-  knitr::kable(reg2_table, digits = 3)
+  ) |>
+  mutate(Variable = case_when(
+    Variable == "(Intercept)" ~ "Reference",
+    Variable == "binary_variable" ~ "Conservative vs. Liberal"
+  ))
+
+
+  knitr::kable(reg_table, digits = 3)
 ```
 I created a binary variable to run a regression, exploring how liberals and conservatives as a whole differed in their shifts in attitude. Here, the "All Liberals" group was assigned to 0, and the "All Conservatives" group was assigned to 1. This regression output shows the relationship between these two combined ideology groups and their average change in attitudes towards immigration policies in the United States. The Intercept category represents the reference group, here it refers to the liberal groups. The binary variable category compares the conservative groups to the liberal groups, showing the differences in average change in attitude between them. The main coefficient of the Intercept is 0.458, representing the average change in attitudes for liberals. The main coefficient for the binary variable is -0.592, suggesting that on average, conservatives experienced a shift in attitudes that were 0.592 units lower compared to liberals. While on average, both ideology groups shifted away from their original views, this regression output shows that conservatives experienced a smaller change in attitudes than liberals.
 
@@ -249,7 +249,7 @@ The p-value of the binary variable is 0.038. With an $\alpha$ of 0.05, we are ab
 
 # Visualization of the regression output with 95% confidence intervals
 ```{r echo = FALSE}
-reg_plot <- ggplot(reg2_table, aes(x = `Variable`, y = `Coefficient`,
+reg_plot <- ggplot(reg_table, aes(x = `Variable`, y = `Coefficient`,
                                   ymin = `Lower Confidence Interval`, ymax = `Upper Confidence Interval`)) +
   geom_pointrange(size = 0.75, color = c("blue", "red")) +
   labs(
@@ -258,7 +258,7 @@ reg_plot <- ggplot(reg2_table, aes(x = `Variable`, y = `Coefficient`,
     y = "Coefficient",
     subtitle = "Confidence intervals (95%)"
   ) +
-  scale_x_discrete(labels = c("Baseline (All Liberals)", "Difference in Attitude Change (All Conservatives)")) +
+  scale_x_discrete(labels = c("Difference in Attitude Change (All Conservatives)", "Reference (All Liberals)")) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(size = 10, family = "Georgia"),

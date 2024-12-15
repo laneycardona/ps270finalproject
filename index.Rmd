@@ -18,7 +18,7 @@ This research is significant, particularly in our country where immigration is a
 ## Data 
 
 # Loading the data
-```{r}
+```{r echo = FALSE}
 library(tidyverse)
 library(ps270data)
 trains
@@ -32,7 +32,7 @@ The dependent variable, the participants' shift in attitudes regarding immigrati
 
 
 # Creating descriptive labels for the numerical values
-```{r}
+```{r echo = FALSE}
 library(tidyverse)
 trains <- trains |>
   mutate(ideology_group = case_when(
@@ -46,7 +46,7 @@ trains
 ``` 
 
 # Creating a variable for the "Treated" group's attitudes before treatment
-```{r}
+```{r echo = FALSE}
 pre_treatment <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -57,7 +57,7 @@ pre_treatment
 ```
 
 # Creating a variable for the "Treated" group's attitudes after treatment
-```{r}
+```{r echo = FALSE}
 post_treatment <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -68,7 +68,7 @@ post_treatment
 ```
 
 # Creating a variable to indicate the participants average change in attitudes
-```{r}
+```{r echo = FALSE}
 average_change <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated") |>
@@ -83,7 +83,7 @@ trains <- trains |>
 ```
 
 # Visualization for each ideology group's attitudes before treatment
-```{r}
+```{r echo = FALSE}
 pre_treatment <- pre_treatment |>
   mutate(pre_treatment_group = case_when(
     ideology_group %in% c("1. Most Liberal", "2. Liberal") ~ "Liberals",
@@ -127,7 +127,7 @@ This table shows the relationship between the political ideologies of the partic
 ## Results
 
 # Visualization for each ideology group's shift in attitudes after treatment
-```{r}
+```{r echo = FALSE}
 average_change <- average_change |>
   mutate(average_change_group = case_when(
     ideology_group %in% c("1. Most Liberal", "2. Liberal") ~ "Liberals",
@@ -168,7 +168,7 @@ ideology_shift_plot
 This bar graph shows the average change in attitudes towards immigration policies after treatment, representing the difference in the attitudes from before and after participants interacted with the foreigners. The average change in attitudes shows either a positive or negative shift from their pre-existing beliefs before treatment. Based on the scale of this experiment, since lower scores reveal a more positive attitude towards immigration, a decrease in score after treatment suggests a positive shift in attitudes towards immigration in the country. Conversely, an increase in score after treatment suggests a negative shift in attitudes towards immigration. From this data, the participants in the "Most Conservative" group experienced a strong positive shift in attitudes after treatment, forming a more supportive stance to immigration than before. Interestingly, the participants in the "Liberal" group experienced a negative shift away from positive immigration attitudes.
 
 # Visualization comapring conservative and liberal participants' attitudes before and after treatment
-```{r}
+```{r echo = FALSE}
 comparison_plot <- data.frame(
   ideology_group = c(" All Liberals","All Conservatives"),
   pre_treatment = c(2.42, 3.67),
@@ -215,7 +215,7 @@ To create a clearer analysis to observe how the levels of attitude changes diffe
 
 
 # Creating a binary variable based on ideology group
-```{r}
+```{r echo = FALSE}
 treated <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
   filter(treatment == "Treated")|>
@@ -228,7 +228,7 @@ treated
 ```
 
 # Regression output of the relationship between ideology groups and average change in attitudes
-```{r}
+```{r echo = FALSE}
 library(broom)
 reg2 <- lm(average_change ~ binary_variable, data = treated)
 reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95) |>
@@ -248,7 +248,7 @@ I created a binary variable to run a regression, exploring how liberals and cons
 The p-value of the binary variable is 0.038. With an $\alpha$ of 0.05, we are able to reject the null hypothesis, as the p-value is smaller than this significance threshold. This indicates that the variable is statistically significant, suggesting that the observed difference in the average change in attitudes between conservatives and liberals is meaningful and not due to random chance. The regression shows that there is a statistically significant difference between conservatives and liberals' levels of attitude changes, explaining that conservatives showed a smaller change in attitudes compared to liberals. However, this doesn't imply that this difference is causal, as this experiment did not control for potential confounding factors. Therefore, we can not determine that the differences in attitude changes were directly caused by the political ideology of the participants. 
 
 # Visualization of the regression output with 95% confidence intervals
-```{r}
+```{r echo = FALSE}
 reg_plot <- ggplot(reg2_table, aes(x = `Variable`, y = `Coefficient`,
                                   ymin = `Lower Confidence Interval`, ymax = `Upper Confidence Interval`)) +
   geom_pointrange(size = 0.75, color = c("blue", "red")) +

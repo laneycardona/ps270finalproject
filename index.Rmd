@@ -17,12 +17,21 @@ This research is significant, particularly in our country where immigration is a
 
 ## Data 
 
+# Loading the data
 ```{r}
 library(tidyverse)
 library(ps270data)
 trains
 ```
 
+The data for this research comes from a randomized field experiment conducted by Harvard Professor, Ryan Enos. He focused on individuals from overwhelmingly white communities who rode the communal train and explored how exposure to demographic change affected their political views. His study was published in the article "Causal Effect of  Intergroup Contact on Exclusionary Attitudes." In the experiment, the trains were randomly assigned to either the "Treated group" or the "Control group," where the treatment involved the presence of two native Spanish-speaking confederates meant to simulate the predicted demographic change in the United States. Those who were in the control group never encountered the confederates. While the original experiment is a randomized experiment, my research uses a before-and-after design, as I am comparing the attitudes before and after the "treated" participants receive treatment to determine the degree of changes in attitudes that the participants experience. 
+
+The independent variable is the political ideologies of the participants, measured by the survey data for each participant from the experiment. Political ideologies are likely to impact individuals' pre-existing beliefs, which would set a baseline for their attitudes towards immigration before treatment, and may impact their responses to treatment. Through this method, we can determine how the treatment effects differ depending on the participants' political ideology. 
+
+The dependent variable, the participants' shift in attitudes regarding immigration policies, is measured using a survey question on a 5 point Likert scale, before and after the treatment. Participants were asked whether or not the number of immigrants in the country should increase or decrease, where a score of 1 indicates the participant believes the number of immigrants should increase and a score of 5 indicates the participant believes the number of immigrants should decrease. The attitude shift of each ideology group is represented by the difference between their responses before and after treatment. 
+
+
+# Creating descriptive labels for the numerical values
 ```{r}
 library(tidyverse)
 trains <- trains |>
@@ -36,7 +45,29 @@ trains <- trains |>
 trains
 ``` 
 
-creating average_change variable
+# Creating a variable for the "Treated" group's attitudes before treatment
+```{r}
+pre_treatment <- trains |>
+  mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
+  filter(treatment == "Treated") |>
+  group_by(ideology_group) |>
+  summarize(numberim.pre = mean(numberim.pre, na.rm = TRUE)) |>
+  mutate(pre_treatment = numberim.pre)
+pre_treatment
+```
+
+# Creating a variable for the "Treated" group's attitudes after treatment
+```{r}
+post_treatment <- trains |>
+  mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
+  filter(treatment == "Treated") |>
+  group_by(ideology_group) |>
+  summarize(numberim.post = mean(numberim.post, na.rm = TRUE)) |>
+  mutate(post_treatment = numberim.post)
+post_treatment
+```
+
+# Creating a variable to indicate the participants average change in attitudes
 ```{r}
 average_change <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
@@ -51,35 +82,7 @@ trains <- trains |>
    mutate(average_change = numberim.post - numberim.pre)
 ```
 
-creating pre treatment variable
-```{r}
-pre_treatment <- trains |>
-  mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
-  filter(treatment == "Treated") |>
-  group_by(ideology_group) |>
-  summarize(numberim.pre = mean(numberim.pre, na.rm = TRUE)) |>
-  mutate(pre_treatment = numberim.pre)
-pre_treatment
-```
-
-creating post treatment variable
-```{r}
-post_treatment <- trains |>
-  mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
-  filter(treatment == "Treated") |>
-  group_by(ideology_group) |>
-  summarize(numberim.post = mean(numberim.post, na.rm = TRUE)) |>
-  mutate(post_treatment = numberim.post)
-post_treatment
-```
-
-The data for this research comes from a randomized field experiment conducted by Harvard Professor, Ryan Enos. He focused on individuals from overwhelmingly white communities who rode the communal train and explored how exposure to demographic change affected their political views. His study was published in the article "Causal Effect of  Intergroup Contact on Exclusionary Attitudes." In the experiment, the trains were randomly assigned to either the "Treated group" or the "Control group," where the treatment involved the presence of two native Spanish-speaking confederates meant to simulate the predicted demographic change in the United States. Those who were in the control group never encountered the confederates. My research uses a before-and-after design, as I am comparing the attitudes before and after the participants receive treatment to determine the degree of changes in views the participants experience.   
-
-The independent variable is the political ideologies of the participants, measured by the survey data for each participant from the experiment. Political ideologies are likely to impact individuals' pre-existing beliefs, which would set a baseline for their attitudes towards immigration before treatment, and may impact their responses to treatment. Through this method, we can determine how the treatment effects differ depending on the participants' political ideology. 
-
-The dependent variable, the participants' shift in attitudes regarding immigration policies, is measured using a survey question on a 5 point Likert scale, before and after the treatment. Participants were asked whether or not the number of immigrants in the country should increase or decrease, where a score of 1 indicates the participant believes the number of immigrants should increase and a score of 5 indicates the participant believes the number of immigrants should decrease. The attitude shift of each ideology group is represented by the difference between their responses before and after treatment. 
-
-creating the pre treatment plot
+# Visualization for each ideology group's attitudes before treatment
 ```{r}
 pre_treatment <- pre_treatment |>
   mutate(pre_treatment_group = case_when(
@@ -98,17 +101,19 @@ pre_treatment_plot <- ggplot(pre_treatment, aes(x = ideology_group,
                     name = "Political Ideology") +
   labs(title = "Attitudes Toward Immigration Policies by Ideology Before Treatment",
        x = "Ideology Group",
-       y = "Attitudes Towards Immigration in the Country
-       (1 = Increase, 5 = Decrease)",
-       subtitle = "Participants were asked if the number of immigrants in the country should increase or decrease") +
+       y = "Attitude Scores Towards Immigration in the Country",
+       subtitle = "Participants were asked if the number of immigrants in the country should increase or decrease",
+       caption = "Scores closer to 1 indicate they want to increase the amount of immigrants,
+       scores closer to 5 indicate they want to decrease the amount of immigrants.") +
   theme_minimal() +
     theme(
     axis.text.x = element_text(size = 7, family = "Georgia"),
     axis.text.y = element_text(size = 10, family = "Georgia"),
     axis.title.x = element_text(size = 12, face = "bold", family = "Georgia"),
-    axis.title.y = element_text(size = 11, face = "bold", family = "Georgia"),
-    plot.title = element_text(size = 13, face = "bold", family = "Georgia"),
+    axis.title.y = element_text(size = 9.5, face = "bold", family = "Georgia"),
+    plot.title = element_text(size = 11.5, face = "bold", family = "Georgia"),
     plot.subtitle = element_text(size = 10, family = "Georgia"),
+    plot.caption = element_text(size = 10, family = "Georgia"),
     legend.title = element_text(size = 11, face = "bold", family = "Georgia"),
     legend.text = element_text(size = 9, family = "Georgia"),
     panel.border = element_rect(color = "black", fill = NA, size = 1),
@@ -116,59 +121,12 @@ pre_treatment_plot <- ggplot(pre_treatment, aes(x = ideology_group,
   )
 pre_treatment_plot
 ```
-
-This table shows the relationship between the political ideologies of the participants and how they felt about whether immigrants in the country should increase or decrease before treatment. Based on the scale where a 1 represents the most positive attitude and 5 represents the most negative, this table shows that before treatment, conservative participants had more negative views towards immigration in the country, while liberal participants had more positive views. More specifically, the more radical conservatives were viewed immigration the most negatively, and the moderate liberals viewed immigration the most positively. This is to be expected, as these beliefs align with the traditional values of conservative and liberal political ideologies. My research explores how the differing political ideologies will result in different levels of shifts in attitudes after receiving treatment. 
-
-```{r}
-post_treatment <- post_treatment |>
-  mutate(post_treatment_group = case_when(
-    ideology_group %in% c("1. Most Liberal", "2. Liberal") ~ "Liberals",
-    ideology_group == "3. Moderate" ~ "Moderates",
-    ideology_group %in% c("4. Conservative", "5. Most Conservative") ~ "Conservatives"
-  ))
-
-post_treatment_plot <- ggplot(post_treatment, aes(x = ideology_group,
-                                               y = post_treatment,
-                                               fill = post_treatment_group)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("Liberals" = "blue",
-                               "Moderates" = "grey",
-                               "Conservatives" = "red"),
-                    name = "Political Ideology") +
-  labs(title = "Attitudes Toward Immigration Policies by Ideology after Treatment",
-       x = "Ideology Group",
-       y = "Attitudes Towards Immigration in the Country
-       (1 = Increase, 5 = Decrease)",
-       subtitle = "Participants were asked if the number of immigrants in the country should increase or decrease") +
-  theme_minimal() +
-    theme(
-    axis.text.x = element_text(size = 7, family = "Georgia"),
-    axis.text.y = element_text(size = 10, family = "Georgia"),
-    axis.title.x = element_text(size = 12, face = "bold", family = "Georgia"),
-    axis.title.y = element_text(size = 11, face = "bold", family = "Georgia"),
-    plot.title = element_text(size = 13, face = "bold", family = "Georgia"),
-    plot.subtitle = element_text(size = 10, family = "Georgia"),
-    legend.title = element_text(size = 11, face = "bold", family = "Georgia"),
-    legend.text = element_text(size = 9, family = "Georgia"),
-    panel.border = element_rect(color = "black", fill = NA, size = 1),
-    legend.background = element_rect(color = "black", fill = NA)
-  )
-post_treatment_plot
-```
-
-
-
-
-
-
-
-
-
+This table shows the relationship between the political ideologies of the participants and how they felt about whether immigrants in the country should increase or decrease before treatment. Based on the scale of this experiment, a score of 1 represents the most positive attitude and a score of 5 represents the most negative. This table shows that before treatment, conservative participants had more negative views towards immigration, as they preferred a decrease in the amount of immigrants in the country. On the other hand, liberal participants had more positive views, as indicated by their lower scores. More specifically, the more radical conservatives were viewed immigration the most negatively, and the moderate liberals viewed immigration the most positively. This is to be expected, as these beliefs align with the traditional values of conservative and liberal political ideologies. My research explores how the differing political ideologies will result in different levels of shifts in attitudes after receiving treatment. 
 
 
 ## Results
 
-creating the shift in attitudes plot
+# Visualization for each ideology group's shift in attitudes after treatment
 ```{r}
 average_change <- average_change |>
   mutate(average_change_group = case_when(
@@ -207,12 +165,9 @@ ideology_shift_plot <- ggplot(average_change, aes(x = ideology_group,
   )
 ideology_shift_plot
 ```
-This bar graph shows the average change in attitudes towards immigration policies after treatment, representing the difference in the attitudes from before and after participants interacted with the foreigners. The average change in attitudes shows either a positive or negative shift from their pre-existing beliefs before treatment. The scale used in this analysis indicates that a score of 1 reflects a positive attitude towards immigration, while a score of 5 reflects a negative attitude towards immigration. Since lower scores reveal a more positive attitude towards immigration, a decrease in score after treatment suggests a positive shift in attitudes towards immigration. On the other hand, an increase in score after treatment would suggest a negative shift in attitudes towards immigration. From this data, the participants in the "Most Conservative" group experienced a strong positive shift in attitudes after treatment, forming a more supportive stance to immigration than before. Interestingly, the participants in the "Liberal" group experienced a negative shift away from positive immigration attitudes.
+This bar graph shows the average change in attitudes towards immigration policies after treatment, representing the difference in the attitudes from before and after participants interacted with the foreigners. The average change in attitudes shows either a positive or negative shift from their pre-existing beliefs before treatment. Based on the scale of this experiment, since lower scores reveal a more positive attitude towards immigration, a decrease in score after treatment suggests a positive shift in attitudes towards immigration in the country. Conversely, an increase in score after treatment suggests a negative shift in attitudes towards immigration. From this data, the participants in the "Most Conservative" group experienced a strong positive shift in attitudes after treatment, forming a more supportive stance to immigration than before. Interestingly, the participants in the "Liberal" group experienced a negative shift away from positive immigration attitudes.
 
-
-
-
-only treated - use this
+# Visualization comapring conservative and liberal participants' attitudes before and after treatment
 ```{r}
 comparison_plot <- data.frame(
   ideology_group = c(" All Liberals","All Conservatives"),
@@ -259,8 +214,7 @@ comparison_plot
 To create a clearer analysis to observe how the levels of attitude changes differed between ideological groups after treatment, I combined the "Most Liberal" and "Liberal" participants into an "All Liberals" group, and combined the "Conservative" and "Most Conservative" participants into an "All Conservatives" group. Taking the average scores for each category, I merged them to create the overall group averages for "All Liberals" and "All Conservatives", showing the average group changes from before and after treatment. Although individually, the "Most Conservative" group experienced a large shift in attitudes, the graph shows that after treatment, on average all conservative participants experienced only a slight shift towards positive attitudes. Additionally, on average, all liberal participants experienced a greater shift towards negative attitudes. 
 
 
-
-Creating the "binary variable" 
+# Creating a binary variable based on ideology group
 ```{r}
 treated <- trains |>
   mutate(treatment = if_else(treatment == 1, "Treated", "Control")) |>
@@ -273,58 +227,46 @@ treated <- trains |>
 treated
 ```
 
-Running a regression to determine the relationship between ideology groups and average change in attitudes
+# Regression output of the relationship between ideology groups and average change in attitudes
 ```{r}
 library(broom)
 reg2 <- lm(average_change ~ binary_variable, data = treated)
-reg2_table <- tidy(reg2)
+reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95)
 knitr::kable(reg2_table, digits = 3)
 ```
 I created a binary variable to run a regression, exploring how liberals and conservatives as a whole differed in their shifts in attitude. Here, the "All Liberals" group was assigned to 0, and the "All Conservatives" group was assigned to 1. This regression output shows the relationship between these two combined ideology groups and their average change in attitudes towards immigration policies in the United States. The Intercept category represents the reference group, here it refers to the liberal groups. The binary variable category compares the conservative groups to the liberal groups, showing the differences in average change in attitude between them. The main coefficient of the Intercept is 0.458, representing the average change in attitudes for liberals. The main coefficient for the binary variable is -0.592, suggesting that on average, conservatives experienced a shift in attitudes that were 0.592 units lower compared to liberals. While on average, both ideology groups shifted away from their original views, this regression output shows that conservatives experienced a smaller change in attitudes than liberals.
 
 The p-value of the binary variable is 0.038. With an $\alpha$ of 0.05, we are able to reject the null hypothesis, as the p-value is smaller than this significance threshold. This indicates that the variable is statistically significant, suggesting that the observed difference in the average change in attitudes between conservatives and liberals is meaningful and not due to random chance. The regression shows that there is a statistically significant difference between conservatives and liberals' levels of attitude changes, explaining that conservatives showed a smaller change in attitudes compared to liberals. However, this doesn't imply that this difference is causal, as this experiment did not control for potential confounding factors. Therefore, we can not determine that the differences in attitude changes were directly caused by the political ideology of the participants. 
 
-
-Creating a visualization for the regression output
+# Visualization of the regression output with 95% confidence intervals
 ```{r}
-reg2_plot <- ggplot(reg2_table, aes(x = term, y = estimate)) +
-  geom_point(size = 3, color = c("blue", "red")) +
-  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error), width = 0.2) +
+reg_plot <- ggplot(reg2_table, aes(x = term, y = estimate,
+                                  ymin = conf.low, ymax = conf.high)) +
+  geom_pointrange(size = 0.75, color = c("blue", "red")) +
   labs(
-    title = "Regression Results treated group only",
-    x = "Ideology",
+    title = "Effect of Ideology Group on Average Attitude Changes",
+    x = "Ideology Group",
     y = "Coefficient",
-    caption = "A negative coefficient indicates participants are shifting towards more positive attitutdes.
-    A positive coefficient indicates participants are shifting towards more negative attitudes. "
+    subtitle = "Confidence intervals (95%)"
   ) +
-  scale_x_discrete(labels = c("All Liberals", "All Conservatives")) +
+  scale_x_discrete(labels = c("Baseline (All Liberals)", "Difference in Attitude Change (All Conservatives)")) +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(size = 12, family = "Georgia"),
+    axis.text.x = element_text(size = 10, family = "Georgia"),
     axis.text.y = element_text(size = 12, family = "Georgia"),
     axis.title.x = element_text(size = 13, face = "bold", family = "Georgia"),
     axis.title.y = element_text(size = 13, face = "bold", family = "Georgia"),
-    plot.caption.position = "panel", 
-    plot.caption = element_text(size = 10, family = "Georgia"), 
-    plot.title = element_text(size = 18, face = "bold", family = "Georgia"),
+    plot.title = element_text(size = 14, face = "bold", family = "Georgia"),
+    plot.subtitle = element_text(size = 12, family = "Georgia"),
     panel.border = element_rect(color = "black", fill = NA, size = 1)
   )
-  
-reg2_plot
+reg_plot
 ```
-This graph shows a visualization of the regression output above. Based on the scale of the experiment, the graph indicates that on average, liberals experienced a shift towards more negative attitudes on immigration policies, while conservatives shifted toward more favorable views. However, the somewhat wide error bar for the binary variable suggest that this estimate is moderately less precise, meaning that there is a little more uncertainty regarding the reliability for this estimate. 
-
+This graph provides a visualization for the regression output above, highlighting the 95% confidence intervals for each variable. Neither confidence interval includes 0, supporting the analysis that the effect of the binary variable on average change in attitudes is statistically significant. These results reveal that there is a meaningful difference in average attitude changes by ideology group. However, the wide confidence interval of the binary variable indicate that there may be some uncertainty regarding the coefficient, as the true value of the effect could be anywhere within the interval. Additionally, the somewhat wide standard error of the variable may also suggest that the coefficient is a little less precise, meaning that it is less reliable. Therefore, these results should be taken with caution when generalizing the effect of the variable for a larger population.
 
 
 ## Conclusion 
 
-Initially, the data aligned with my hypothesis. Conservatives started out with the most negative views on immigration, and on average, after encountering the confederates, they experienced a shift towards more favorable attitudes on immigration compared to liberals. While they did shift toward more positive views, their shift in overall attitudes was much smaller than liberals', indicating that they acted more conservatively. Additionally, unlike what I expected, liberals actually experienced a shift toward more negative attitudes. The p-value from the regression output indicates that the main coefficient is statistically significant, supporting these results that show there is a meaningful difference in the attitude shifts between the two ideology groups. Therefore, my hypothesis was not supported by the data. The presence of external influences as confounding factors is one of the most significant limitations of this research. Because this experiment used a before-and-after research design, the results don't consider the possible external influences, such as peer interactions, media exposure, or major events that could affect the participants' shifts in attitudes. Therefore, through the fundamental problem of causal inference, it is impossible to determine the confederate interaction is the direct cause of the attitude shifts between the two ideology groups. To improve my analysis, I would increase the sample size of the experiment. While the current standard error is not extremely large, a bigger sample size would reduce the margin of error that we do have, creating more precise and accurate estimates of the regression coefficients. There were significant disparities in attitude shifts between the specific categories and the overall combined ideology groups. Therefore, a larger sample size would raise the generalizability of the results, making them representative of a wider population. This would improve the reliability and certainty of the analysis, making it more likely that a true effect and difference can be observed if it exists. 
+Initially, the data aligned with my hypothesis. Conservatives started out with the most negative views on immigration, and on average, after encountering the confederates, they experienced a shift towards more favorable attitudes on immigration compared to liberals. While they did shift toward more positive views, their shift in overall attitudes was much smaller than liberals', indicating that they acted more conservatively. Additionally, unlike what I expected, liberals actually experienced a shift toward more negative attitudes. The p-value from the regression output indicates that the main coefficient is statistically significant, supporting the data that show there is a meaningful difference in the attitude shifts between the two ideology groups. This result suggests that the attitude shifts of each ideology group differed from my original expectations, therefore proving my hypothesis was not supported by the data. 
 
-
-
-
-
-
-
-
-
+The presence of external influences as confounding factors is one of the most significant limitations of this research. Because this experiment used a before-and-after research design, the results don't consider the possible external influences, such as peer interactions, media exposure, or major events that could affect the participants' shifts in attitudes. Therefore, through the fundamental problem of causal inference, it is impossible to determine the confederate interaction is the direct cause of the attitude shifts between the two ideology groups. To improve my analysis, I would increase the sample size of the experiment. The current confidence interval is relatively wide, meaning that there is more uncertainty regarding the reliability of the coefficient from the regression. A larger sample size would create narrower confidence intervals and would reduce the margin of error. This would decrease the range of the effect's true value, providing a more precise and accurate estimate of the change in attitudes towards immigration for each ideology group. Additionally, there were significant disparities in attitude shifts between the specific categories of ideologies compared to the overall ideology groups ("All Liberals" and "All Conservatives"). Therefore, a bigger sample sample size would raise the applicability of the results, making them more representative of a wider population. This would improve the reliability and certainty of the analysis, making it more likely that a true effect and difference could be observed observed if it exists. 

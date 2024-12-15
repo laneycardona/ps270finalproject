@@ -1844,28 +1844,37 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
 <span><span class='va'>reg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>average_change</span> <span class='op'>~</span> <span class='va'>binary_variable</span>, data <span class='op'>=</span> <span class='va'>treated</span><span class='op'>)</span></span>
-<span><span class='va'>reg2_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>reg2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>reg2_table</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>reg2_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>reg2</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span></span>
+<span>    <span class='st'>"Variable"</span> <span class='op'>=</span> <span class='va'>term</span>,</span>
+<span>    <span class='st'>"Coefficient"</span> <span class='op'>=</span> <span class='va'>estimate</span>,</span>
+<span>    <span class='st'>"Standard Error"</span> <span class='op'>=</span> <span class='va'>std.error</span>,</span>
+<span>    <span class='st'>"Statistic"</span> <span class='op'>=</span> <span class='va'>statistic</span>,</span>
+<span>    <span class='st'>"P-value"</span> <span class='op'>=</span> <span class='va'>p.value</span>,</span>
+<span>    <span class='st'>"Lower Confidence Interval"</span> <span class='op'>=</span> <span class='va'>conf.low</span>,</span>
+<span>    <span class='st'>"Upper Confidence Interval"</span> <span class='op'>=</span> <span class='va'>conf.high</span></span>
+<span>  <span class='op'>)</span></span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>reg2_table</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
 <colgroup>
-<col style="width: 22%" />
-<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 10%" />
 <col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 11%" />
-<col style="width: 12%" />
-<col style="width: 13%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">conf.low</th>
-<th style="text-align: right;">conf.high</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Coefficient</th>
+<th style="text-align: right;">Standard Error</th>
+<th style="text-align: right;">Statistic</th>
+<th style="text-align: right;">P-value</th>
+<th style="text-align: right;">Lower Confidence Interval</th>
+<th style="text-align: right;">Upper Confidence Interval</th>
 </tr>
 </thead>
 <tbody>
@@ -1895,8 +1904,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1 id="visualization-of-the-regression-output-with-95-confidence-intervals">Visualization of the regression output with 95% confidence intervals</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>reg_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>reg2_table</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>term</span>, y <span class='op'>=</span> <span class='va'>estimate</span>,</span>
-<span>                                  ymin <span class='op'>=</span> <span class='va'>conf.low</span>, ymax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>reg_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>reg2_table</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>`Variable`</span>, y <span class='op'>=</span> <span class='va'>`Coefficient`</span>,</span>
+<span>                                  ymin <span class='op'>=</span> <span class='va'>`Lower Confidence Interval`</span>, ymax <span class='op'>=</span> <span class='va'>`Upper Confidence Interval`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_linerange.html'>geom_pointrange</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>0.75</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
 <span>    title <span class='op'>=</span> <span class='st'>"Effect of Ideology Group on Average Attitude Changes"</span>,</span>

@@ -231,8 +231,17 @@ treated
 ```{r}
 library(broom)
 reg2 <- lm(average_change ~ binary_variable, data = treated)
-reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95)
-knitr::kable(reg2_table, digits = 3)
+reg2_table <- tidy(reg2, conf.int = TRUE, conf.level = 0.95) |>
+  rename(
+    "Variable" = term,
+    "Coefficient" = estimate,
+    "Standard Error" = std.error,
+    "Statistic" = statistic,
+    "P-value" = p.value,
+    "Lower Confidence Interval" = conf.low,
+    "Upper Confidence Interval" = conf.high
+  )
+  knitr::kable(reg2_table, digits = 3)
 ```
 I created a binary variable to run a regression, exploring how liberals and conservatives as a whole differed in their shifts in attitude. Here, the "All Liberals" group was assigned to 0, and the "All Conservatives" group was assigned to 1. This regression output shows the relationship between these two combined ideology groups and their average change in attitudes towards immigration policies in the United States. The Intercept category represents the reference group, here it refers to the liberal groups. The binary variable category compares the conservative groups to the liberal groups, showing the differences in average change in attitude between them. The main coefficient of the Intercept is 0.458, representing the average change in attitudes for liberals. The main coefficient for the binary variable is -0.592, suggesting that on average, conservatives experienced a shift in attitudes that were 0.592 units lower compared to liberals. While on average, both ideology groups shifted away from their original views, this regression output shows that conservatives experienced a smaller change in attitudes than liberals.
 
@@ -240,8 +249,8 @@ The p-value of the binary variable is 0.038. With an $\alpha$ of 0.05, we are ab
 
 # Visualization of the regression output with 95% confidence intervals
 ```{r}
-reg_plot <- ggplot(reg2_table, aes(x = term, y = estimate,
-                                  ymin = conf.low, ymax = conf.high)) +
+reg_plot <- ggplot(reg2_table, aes(x = `Variable`, y = `Coefficient`,
+                                  ymin = `Lower Confidence Interval`, ymax = `Upper Confidence Interval`)) +
   geom_pointrange(size = 0.75, color = c("blue", "red")) +
   labs(
     title = "Effect of Ideology Group on Average Attitude Changes",
